@@ -25,7 +25,6 @@ function getParameterByName(name) {
 	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-
 function drawFrame() {
 
 	// Shake it baby
@@ -49,7 +48,7 @@ function drawFrame() {
 
 	// Draw the image
 	context.fillStyle = "#FFFFFF";
-	context.fillRect(0, 0, 1010, 600);
+	context.fillRect(0, 0, 3000, 1200);
 	context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight);
 
 	i++;
