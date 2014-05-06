@@ -2,6 +2,16 @@
 var canvas = document.getElementById("shaker");
 var context = canvas.getContext("2d");
 
+// Constants
+var VERTICAL_CORRECTION = -50;
+var HORIZONTAL_CORRECTION = 2;
+
+var WHITE = "#FFFFFF";
+var BLACK = "#000000";
+var FONT = "80px Impact";
+
+var OUTLINE_WIDTH = 4.5;
+
 // Image variables
 var image = new Image();
 
@@ -14,6 +24,9 @@ var sourceWidth;
 var shakeAmount = parseInt(getParameterByName("shakeamount"));
 var shakeTime = parseInt(getParameterByName("shaketime"));
 
+// Variables for drawing TEXT
+var bigText = getParameterByName("bigtext");
+
 // Right, down, left, up
 var directions = ["right", "down", "left", "up"];
 var i = 0;
@@ -24,7 +37,6 @@ function getParameterByName(name) {
 	results = regex.exec(location.search);
 	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
 
 function drawFrame() {
 
@@ -48,9 +60,23 @@ function drawFrame() {
 	}
 
 	// Draw the image
-	context.fillStyle = "#FFFFFF";
-	context.fillRect(0, 0, 1010, 600);
+	context.fillStyle = WHITE;
+	context.fillRect(0, 0, 3000, 1200);
 	context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight);
+
+	// Draw the text
+	fontX = sourceWidth / HORIZONTAL_CORRECTION;
+	fontY = sourceHeight + VERTICAL_CORRECTION;
+
+	context.font = FONT;
+	context.textAlign = "center";
+
+	context.fillStyle = WHITE;
+	context.fillText(bigText, fontX, fontY);
+
+	context.strokeStyle = BLACK;
+	context.lineWidth = OUTLINE_WIDTH;
+	context.strokeText(bigText, fontX, fontY);
 
 	i++;
 }
